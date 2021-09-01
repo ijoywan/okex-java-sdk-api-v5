@@ -5,6 +5,7 @@ import com.haoshuashua.okex.config.APIConfiguration;
 import com.haoshuashua.okex.constant.APIConstants;
 import com.haoshuashua.okex.exception.APIException;
 import com.haoshuashua.okex.bean.funding.HttpResult;
+import com.haoshuashua.okex.exception.APIKeyException;
 import com.haoshuashua.okex.utils.DateUtils;
 import okhttp3.*;
 import org.slf4j.Logger;
@@ -68,7 +69,10 @@ public class ApiHttp {
                 return bodyString;
             } else if (APIConstants.resultStatusArray.contains(status)) {
                 HttpResult result = com.alibaba.fastjson.JSON.parseObject(bodyString, HttpResult.class);
-                throw new APIException(result.getCode(), result.getMessage());
+                if(result.getCode() >= 50100 && result.getCode() <= 50115) {
+                    throw new APIKeyException(result.getCode(), result.getMsg());
+                }
+                throw new APIException(result.getCode(), result.getMsg());
             } else {
                 throw new APIException(message);
             }

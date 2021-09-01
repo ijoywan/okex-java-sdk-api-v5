@@ -7,6 +7,7 @@ import com.haoshuashua.okex.exception.APIException;
 import com.haoshuashua.okex.bean.account.result.CursorPager;
 import com.haoshuashua.okex.bean.funding.HttpResult;
 import com.haoshuashua.okex.enums.HttpHeadersEnum;
+import com.haoshuashua.okex.exception.APIKeyException;
 import com.haoshuashua.okex.utils.DateUtils;
 import com.alibaba.fastjson.JSON;
 import okhttp3.Headers;
@@ -80,7 +81,11 @@ public class APIClient {
 
                 ////如果状态码是400,401,429,500中的任意一个，抛出异常
             } else {
+
                 final HttpResult result = JSON.parseObject(new String(response.errorBody().bytes()), HttpResult.class);
+                if(result.getCode() >= 50100 && result.getCode() <= 50115) {
+                    throw new APIKeyException(result.getCode(), result.getMsg());
+                }
                 throw new APIException(result.getCode(), result.getMsg());
             }
         } catch (final IOException e) {
@@ -112,7 +117,10 @@ public class APIClient {
             }
             if (APIConstants.resultStatusArray.contains(status)) {
                 final HttpResult result = JSON.parseObject(new String(response.errorBody().bytes()), HttpResult.class);
-                throw new APIException(result.getCode(), result.getMessage());
+                if(result.getCode() >= 50100 && result.getCode() <= 50115) {
+                    throw new APIKeyException(result.getCode(), result.getMsg());
+                }
+                throw new APIException(result.getCode(), result.getMsg());
             }
             throw new APIException(message);
         } catch (final IOException e) {
