@@ -1,6 +1,11 @@
 package com.haoshuashua.okex.bean.account.param;
 
+import lombok.Data;
+
+@Data
 public class SetPositionMode {
+
+    private String posMode;
 
     @Override
     public String toString() {
@@ -9,15 +14,6 @@ public class SetPositionMode {
                 '}';
     }
 
-    public String getPosMode() {
-        return posMode;
-    }
-
-    public void setPosMode(String posMode) {
-        this.posMode = posMode;
-    }
-
-    private String posMode;
 
 
 }

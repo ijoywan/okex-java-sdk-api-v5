@@ -1,6 +1,8 @@
 package com.haoshuashua.okex.bean.funding;
 
+import lombok.Data;
 
+@Data
 public class CursorPageParams {
     /**
      * Request page before (newer) this pagination id.
@@ -16,28 +18,4 @@ public class CursorPageParams {
      * Number of results per request. Maximum 100. (default 100)
      */
     protected int limit;
-
-    public int getBefore() {
-        return before;
-    }
-
-    public void setBefore(int before) {
-        this.before = before;
-    }
-
-    public int getAfter() {
-        return after;
-    }
-
-    public void setAfter(int after) {
-        this.after = after;
-    }
-
-    public int getLimit() {
-        return limit;
-    }
-
-    public void setLimit(int limit) {
-        this.limit = limit;
-    }
 }
