@@ -78,15 +78,16 @@ public class APIHttpClient {
         builder.add(APIConstants.CONTENT_TYPE, ContentTypeEnum.APPLICATION_JSON_UTF8.contentType());
         builder.add(APIConstants.COOKIE, this.getCookie());
 
+        if(this.config.getIsSimulate()) {
+            builder.add("x-simulated-trading","1");
+        }
+
         if (this.credentials.getSecretKey() != null && this.credentials.getSecretKey().length() != 0 ) {
             //拼接上秘钥，密码，签名和时间戳
             builder.add(HttpHeadersEnum.OK_ACCESS_KEY.header(), this.credentials.getApiKey());
             builder.add(HttpHeadersEnum.OK_ACCESS_SIGN.header(), this.sign(request, timestamp));
             builder.add(HttpHeadersEnum.OK_ACCESS_TIMESTAMP.header(), timestamp);
             builder.add(HttpHeadersEnum.OK_ACCESS_PASSPHRASE.header(), this.credentials.getPassphrase());
-//            builder.add("x-simulated-trading","1");
-        }else{
-//            builder.add("x-simulated-trading","1");
         }
 
         return builder.build();

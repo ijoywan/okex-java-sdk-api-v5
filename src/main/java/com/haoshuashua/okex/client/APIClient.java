@@ -65,7 +65,6 @@ public class APIClient {
         try {
 
             final Response<T> response = call.execute();
-//            System.out.println("response-------------------------"+call.toString());
             //是否打印config配置信息
             if (this.config.isPrint()) {
                 //打印响应信息
@@ -129,13 +128,10 @@ public class APIClient {
             final String limit = response.headers().get(HttpHeadersEnum.OK_LIMIT.header());
             if (StringUtils.isNotEmpty(limit)) {
                 responseInfo.append("\n\t\t").append("Headers: ");
-//                responseInfo.append("\n\t\t\t").append(HttpHeadersEnum.OK_BEFORE.header()).append(": ").append(response.headers().get(HttpHeadersEnum.OK_BEFORE.header()));
-//                responseInfo.append("\n\t\t\t").append(HttpHeadersEnum.OK_AFTER.header()).append(": ").append(response.headers().get(HttpHeadersEnum.OK_AFTER.header()));
                 responseInfo.append("\n\t\t\t").append(HttpHeadersEnum.OK_FROM.header()).append(": ").append(response.headers().get(HttpHeadersEnum.OK_FROM.header()));
                 responseInfo.append("\n\t\t\t").append(HttpHeadersEnum.OK_TO.header()).append(": ").append(response.headers().get(HttpHeadersEnum.OK_TO.header()));
                 responseInfo.append("\n\t\t\t").append(HttpHeadersEnum.OK_LIMIT.header()).append(": ").append(limit);
             }
-            //responseInfo.append("\n\t\t").append("返回数据: ").append(response.toString());
             responseInfo.append("\n\t\t").append("Status: ").append(response.code());
             responseInfo.append("\n\t\t").append("Message: ").append(response.message());
             if(response.body()!=null){

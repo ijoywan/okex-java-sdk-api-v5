@@ -2,7 +2,9 @@ package com.haoshuashua.okex.config;
 
 import com.haoshuashua.okex.constant.APIConstants;
 import com.haoshuashua.okex.enums.I18nEnum;
+import lombok.Data;
 
+@Data
 public class APIConfiguration {
 
     /**
@@ -21,10 +23,6 @@ public class APIConfiguration {
      * Rest api endpoint url.
      */
     private String endpoint;
-
-
-
-
 
     /**
      * Host connection timeout.
@@ -53,6 +51,11 @@ public class APIConfiguration {
      */
     private I18nEnum i18n;
 
+    /**
+     *  is simulate
+     */
+    private Boolean isSimulate = false;
+
     public APIConfiguration() {
         this(null);
     }
@@ -68,86 +71,7 @@ public class APIConfiguration {
         this.writeTimeout = APIConstants.TIMEOUT;
         this.retryOnConnectionFailure = true;
         this.print = false;
+        this.isSimulate = false;
         this.i18n = I18nEnum.ENGLISH;
-    }
-
-    public String getApiKey() {
-        return apiKey;
-    }
-
-    public void setApiKey(String apiKey) {
-        this.apiKey = apiKey;
-    }
-
-    public String getSecretKey() {
-        return secretKey;
-    }
-
-    public void setSecretKey(String secretKey) {
-        this.secretKey = secretKey;
-    }
-
-    public String getPassphrase() {
-        return passphrase;
-    }
-
-    public void setPassphrase(String passphrase) {
-        this.passphrase = passphrase;
-    }
-
-    public String getEndpoint() {
-        return endpoint;
-    }
-
-    public void setEndpoint(String endpoint) {
-        this.endpoint = endpoint;
-    }
-
-    public long getConnectTimeout() {
-        return connectTimeout;
-    }
-
-    public void setConnectTimeout(long connectTimeout) {
-        this.connectTimeout = connectTimeout;
-    }
-
-    public long getReadTimeout() {
-        return readTimeout;
-    }
-
-    public void setReadTimeout(long readTimeout) {
-        this.readTimeout = readTimeout;
-    }
-
-    public long getWriteTimeout() {
-        return writeTimeout;
-    }
-
-    public void setWriteTimeout(long writeTimeout) {
-        this.writeTimeout = writeTimeout;
-    }
-
-    public boolean isRetryOnConnectionFailure() {
-        return retryOnConnectionFailure;
-    }
-
-    public void setRetryOnConnectionFailure(boolean retryOnConnectionFailure) {
-        this.retryOnConnectionFailure = retryOnConnectionFailure;
-    }
-
-    public boolean isPrint() {
-        return print;
-    }
-
-    public void setPrint(boolean print) {
-        this.print = print;
-    }
-
-    public I18nEnum getI18n() {
-        return i18n;
-    }
-
-    public void setI18n(I18nEnum i18n) {
-        this.i18n = i18n;
     }
 }

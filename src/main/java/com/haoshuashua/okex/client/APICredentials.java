@@ -1,8 +1,10 @@
 package com.haoshuashua.okex.client;
 
 import com.haoshuashua.okex.config.APIConfiguration;
+import lombok.Data;
 
 
+@Data
 public class APICredentials {
     /**
      * The user's secret key provided by OKEx.
@@ -23,29 +25,5 @@ public class APICredentials {
         this.apiKey = config.getApiKey();
         this.secretKey = config.getSecretKey();
         this.passphrase = config.getPassphrase();
-    }
-
-    public String getApiKey() {
-        return apiKey;
-    }
-
-    public void setApiKey(String apiKey) {
-        this.apiKey = apiKey;
-    }
-
-    public String getSecretKey() {
-        return secretKey;
-    }
-
-    public void setSecretKey(String secretKey) {
-        this.secretKey = secretKey;
-    }
-
-    public String getPassphrase() {
-        return passphrase;
-    }
-
-    public void setPassphrase(String passphrase) {
-        this.passphrase = passphrase;
     }
 }
